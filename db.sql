@@ -172,11 +172,38 @@ WHERE c.cliId = 1;
 
 /* 7) */
 
-SELECT e.detCantidad, e.proId, p.proNombre, (e.detCantidad * e.detImporte) as Acumulado
+SELECT e.detCantidad as Cantidad, e.proId, p.proNombre as Producto, (e.detCantidad * e.detImporte) as Acumulado
 FROM tblDetVentas AS e
 JOIN tblProductos AS p
     on e.proId = p.proId; 
-    /* on e.cliId = e.venFolio; */
+
+/* 8) */
+
+
+
+/* 9) */
+select count(*) As Productos from tblProductos;
+
+
+select tv.cliId, count(venFolio), tc.cliNombre
+JOIN tblClientes as tc 
+    On tc.cliId = tv.cliId;
+
+
+
+/* 10 */
+/* SELECT tv.cliId, tc.cliNombre, COUNT(venFolio)
+FROM tblVentas as tv
+JOIN tblClientes as tc 
+    ON tc.cliId = tv.cliId
+GROUP tv.cliId; */
+
+
+SELECT tv.cliId, tc.cliNombre, COUNT(*) AS cantidad
+FROM tblVentas as tv
+JOIN tblClientes as tc 
+GROUP BY tv.cliId;
+
 
 
 /* SELECT * FROM tblDetVentas AS e
@@ -184,3 +211,11 @@ JOIN tblClientes AS c
 JOIN tblVentas as v */
 
 
+/* select cliId, count(venFolio) FROM tblVentas group by cliId; */
+
+
+select tv.cliId, tc.cliNombre AS NombreCliente, COUNT(tv.venFolio) AS FoliosAdquiridos 
+FROM tblVentas as tv
+JOIN tblClientes as tc
+    ON tc.cliId = tv.cliId
+GROUP BY tv.cliId;
