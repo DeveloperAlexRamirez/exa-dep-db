@@ -64,6 +64,24 @@ CREATE TABLE IF NOT EXISTS tblVentas(
     FOREIGN KEY(cliId) references tblClientes(cliId)
 );
 
+INSERT INTO tblVentas
+VALUES (1, '2011-09-16' ,20.50, 1);
+
+INSERT INTO tblVentas
+VALUES (2, '2011-09-17' ,46.50, 1);
+
+INSERT INTO tblVentas
+VALUES (3, '2011-06-18' ,45.50, 1);
+
+INSERT INTO tblVentas
+VALUES (4, '2011-10-16' ,18, 2);
+
+INSERT INTO tblVentas
+VALUES (5, '2011-10-19' ,4.50, 2);
+
+INSERT INTO tblVentas
+VALUES (6, '2011-10-16' ,10.50, 3);
+
 CREATE TABLE IF NOT EXISTS tblDetVentas(
     venFolio INT NOT NULL,
     proId INT NOT NULL,
@@ -74,3 +92,38 @@ CREATE TABLE IF NOT EXISTS tblDetVentas(
 
     FOREIGN KEY(proId) references tblProductos(proId)
 );
+
+
+
+ALTER TABLE tblDetVentas
+MODIFY COLUMN detImporte DOUBLE;
+
+INSERT INTO tblDetVentas
+VALUES (1, 10 ,1, 10.50);
+
+INSERT INTO tblDetVentas
+VALUES (1, 20 ,2, 10.00);
+
+INSERT INTO tblDetVentas
+VALUES (2, 10 ,3, 31.50);
+
+INSERT INTO tblDetVentas
+VALUES (2, 20 ,3, 15.00);
+
+INSERT INTO tblDetVentas
+VALUES (3, 10 ,3, 31.50);
+
+INSERT INTO tblDetVentas
+VALUES (3, 20 ,1, 5);
+
+INSERT INTO tblDetVentas
+VALUES (3, 30 ,2, 9);
+
+INSERT INTO tblDetVentas
+VALUES (4, 30 ,4, 18);
+
+INSERT INTO tblDetVentas
+VALUES (5, 30 ,1, 4.50);
+
+INSERT INTO tblDetVentas
+VALUES (6, 10 ,1, 10.50);
