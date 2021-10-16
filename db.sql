@@ -64,6 +64,12 @@ CREATE TABLE IF NOT EXISTS tblVentas(
     FOREIGN KEY(cliId) references tblClientes(cliId)
 );
 
+UPDATE tblVentas
+SET venFecha = '2001-10-17'
+WHERE venFolio = 4
+
+
+
 INSERT INTO tblVentas
 VALUES (1, '2011-09-16' ,20.50, 1);
 
