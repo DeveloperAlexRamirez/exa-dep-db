@@ -77,7 +77,7 @@ UPDATE tblVentas
 SET venFecha = '2001-10-17'
 WHERE venFolio = 4
 
-
+SET FOREIGN_KEY_CHECKS=0;
 
 
 INSERT INTO tblVentas
@@ -97,6 +97,8 @@ VALUES (5, '2011-10-19' ,4.50, 2);
 
 INSERT INTO tblVentas
 VALUES (6, '2011-10-16' ,10.50, 3);
+
+
 
 DELETE FROM tblVentas 
     WHERE venFecha = '2011-10-19';
@@ -172,13 +174,38 @@ WHERE c.cliId = 1;
 
 /* 7) */
 
+/* SELECT e.detCantidad as Cantidad, e.proId, p.proNombre as Producto, (e.detCantidad * e.detImporte) as Acumulado
+FROM tblDetVentas AS e
+JOIN tblProductos AS p
+    on e.proId = p.proId;  */
+
 SELECT e.detCantidad as Cantidad, e.proId, p.proNombre as Producto, (e.detCantidad * e.detImporte) as Acumulado
 FROM tblDetVentas AS e
 JOIN tblProductos AS p
     on e.proId = p.proId; 
 
-/* 8) */
 
+select tdv.proId, tdv.detImporte, count(tdv.proId) as CantidadProducto, tdv.detImporte * count(tdv.detCantidad) as ValorTotal 
+FROM tblDetVentas as tdv
+GROUP BY tdv.proId;
+
+select tv.proId, tc.proNombre, SUM(tv.detCantidad), SUM(tv.detImporte) as SumaTotal FROM tblDetVentas as tv JOIN tblProductos as tc ON tc.PROID = tv.PROID GROUP BY tv.PROID;
+
+/* 10 */
+/* select tdv.proId, tdv.detImporte, count(tdv.detCantidad) as CantidadProducto, tdv.detImporte * tdv.detCantidad as ValorTotal 
+FROM tblDetVentas as tdv
+GROUP BY tdv.proId; */
+
+/* select tv.cliId, tc.cliNombre AS NombreCliente, COUNT(tv.venFolio) AS FoliosAdquiridos 
+FROM tblVentas as tv
+JOIN tblClientes as tc
+    ON tc.cliId = tv.cliId
+GROUP BY tv.cliId; */
+
+
+/* 8) */
+SELECT venTotal, cliNombre FROM tblClientes, tblVentas
+WHERE venTotal=46.50 and cliNombre= 'Adolfo Ochoa';
 
 
 /* 9) */
@@ -213,7 +240,7 @@ JOIN tblVentas as v */
 
 /* select cliId, count(venFolio) FROM tblVentas group by cliId; */
 
-
+/* 10) */
 select tv.cliId, tc.cliNombre AS NombreCliente, COUNT(tv.venFolio) AS FoliosAdquiridos 
 FROM tblVentas as tv
 JOIN tblClientes as tc
