@@ -55,6 +55,15 @@ VALUES (30, 'TORONJA',4.50, 1);
 ALTER TABLE tblProductos
 MODIFY COLUMN proNombre VARCHAR(40);
 
+UPDATE tblClientes
+  SET cliTel=NULL
+  WHERE cliTel= 1;
+
+
+UPDATE tblClientes
+  SET cliExiste= 1
+  WHERE cliId= 3;
+
 CREATE TABLE IF NOT EXISTS tblVentas(
     venFolio INT PRIMARY KEY NOT NULL,
     venFecha DATETIME,
@@ -67,6 +76,7 @@ CREATE TABLE IF NOT EXISTS tblVentas(
 UPDATE tblVentas
 SET venFecha = '2001-10-17'
 WHERE venFolio = 4
+
 
 
 
@@ -88,6 +98,9 @@ VALUES (5, '2011-10-19' ,4.50, 2);
 INSERT INTO tblVentas
 VALUES (6, '2011-10-16' ,10.50, 3);
 
+DELETE FROM tblVentas 
+    WHERE venFecha = '2011-10-19';
+
 CREATE TABLE IF NOT EXISTS tblDetVentas(
     venFolio INT NOT NULL,
     proId INT NOT NULL,
@@ -99,6 +112,14 @@ CREATE TABLE IF NOT EXISTS tblDetVentas(
     FOREIGN KEY(proId) references tblProductos(proId)
 );
 
+SELECT cliNombre
+FROM tblClientes
+WHERE cliNombre LIKE 'A%';
+
+/* 4) */
+SELECT cliId, cliNombre
+FROM tblClientes
+WHERE cliTel LIKE '';
 
 
 ALTER TABLE tblDetVentas
@@ -133,3 +154,33 @@ VALUES (5, 30 ,1, 4.50);
 
 INSERT INTO tblDetVentas
 VALUES (6, 10 ,1, 10.50);
+
+
+/* 5) */
+
+ SELECT count(*) as Clientes
+  FROM tblClientes
+  WHERE cliExiste = 1;
+
+  /* 6) */
+SELECT * FROM tblDetVentas AS e
+JOIN tblClientes AS c
+    on c.cliId = e.venFolio
+JOIN tblProductos AS p
+    on e.proId = p.proId
+WHERE c.cliId = 1;
+
+/* 7) */
+
+SELECT e.detCantidad, e.proId, p.proNombre, (e.detCantidad * e.detImporte) as Acumulado
+FROM tblDetVentas AS e
+JOIN tblProductos AS p
+    on e.proId = p.proId; 
+    /* on e.cliId = e.venFolio; */
+
+
+/* SELECT * FROM tblDetVentas AS e
+JOIN tblClientes AS c
+JOIN tblVentas as v */
+
+
