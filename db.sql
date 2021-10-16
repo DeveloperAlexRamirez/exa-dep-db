@@ -12,6 +12,15 @@ CREATE TABLE IF NOT EXISTS tblClientes(
     cliTel VARCHAR(20)
 );
 
+/* a) */
+ALTER TABLE tblClientes
+MODIFY COLUMN cliNombre VARCHAR(20);
+
+/* b) */
+ALTER TABLE tblClientes
+ADD COLUMN cliExiste INT;
+
+
 CREATE TABLE IF NOT EXISTS tblProductos(
     proId INT PRIMARY KEY NOT NULL,
     proNombre INT,
