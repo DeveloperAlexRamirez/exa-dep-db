@@ -14,11 +14,26 @@ CREATE TABLE IF NOT EXISTS tblClientes(
 
 /* a) */
 ALTER TABLE tblClientes
-MODIFY COLUMN cliNombre VARCHAR(20);
+MODIFY COLUMN cliNombre VARCHAR(40);
 
 /* b) */
 ALTER TABLE tblClientes
 ADD COLUMN cliExiste INT;
+
+/* c) */
+ALTER TABLE tblClientes
+CHANGE cliCol cliColonia VARCHAR(20);
+
+
+INSERT INTO tblClientes
+VALUES (1, 'Adolfo Ochoa Ramirez', '25 de Marzo 308', 'Palo seco', '2246808', 1);
+
+INSERT INTO tblClientes
+VALUES (2, 'Claudia Cervantes', 'miramar 246', 'Pitillal', '2285151', 1);
+
+INSERT INTO tblClientes(cliId, cliNombre, cliDomicilio, cliColonia, cliTel)
+VALUES (3, 'Ferando Corona Mendoza', NULL, NULL, 1);
+
 
 
 CREATE TABLE IF NOT EXISTS tblProductos(
@@ -27,6 +42,18 @@ CREATE TABLE IF NOT EXISTS tblProductos(
     proCosto DOUBLE,
     proExiste INT
 );
+
+INSERT INTO tblProductos
+VALUES (10, 'MANZANA',10.50, 1);
+
+INSERT INTO tblProductos
+VALUES (20, 'PERA',5.00, 1);
+
+INSERT INTO tblProductos
+VALUES (30, 'TORONJA',4.50, 1);
+
+ALTER TABLE tblProductos
+MODIFY COLUMN proNombre VARCHAR(40);
 
 CREATE TABLE IF NOT EXISTS tblVentas(
     venFolio INT PRIMARY KEY NOT NULL,
